@@ -1,0 +1,30 @@
+spring:
+  thymeleaf:
+    cache: false
+    #src/main/resources/templates default ???.
+    #prefix: classpath:/templates
+    #suffix: .html
+  #mvc:
+    #static-path-pattern: /static/**
+
+
+  datasource:
+    #jayspt  DB ?? ??? ??.
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/apartment
+    username: root
+    password: 1q2w3e4r!@#
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+#p6spy ?? ??
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+
+server:
+  port: 8080
+
+
