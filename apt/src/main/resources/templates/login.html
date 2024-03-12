@@ -1,0 +1,81 @@
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8">
+    <title>로그인 화면</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body class="login">
+<div class="login-out">
+    <div class="login-in clearfix">
+        <div class="login-left">
+            <h1 class="title">
+                <h4 class="h4">아파트 매매 거래정보</h4>
+                <h1>App test</h1>
+                <!--<p class="p"></p>-->
+            </h1>
+
+            <form th:action="@{/user/login-processing}" method="post">
+                <div th:if="${errorMsg!=null} " th:text="${errorMsg}" class="text-red" style="color: red;"></div>
+                <div class="login-box">
+                    <table>
+                        <colgroup>
+                            <col style="width: 100%;">
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <p>아이디</p>
+                                <input type="text" class="input4" name="loginId" placeholder="ID" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>비밀번호</p>
+                                <input type="password" placeholder="PASSWORD" name="password" class="input4" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="submit" value="로그인" class="btn-login">
+                            </td>
+                            <td>
+                                <input type="button" onclick="signUp();"  value="Sign Up" class="btn-login">
+                                <script>
+                                    function signUp(){
+                                        location.href= "/user/sign-up";
+                                    }
+                                </script>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+
+        <div class="login-right">
+            <div class="right-bg">
+            </div>
+
+        </div>
+    </div>
+    <div class="logo-box">
+    <!-- 세종 -->
+        <!--<img src="/img/logo.svg" alt="하단로고"></div>-->
+    <!-- 용인 -->
+<!--        <img src="/img/logo-kor.svg" alt="하단로고"></div>-->
+    <!-- 울산 -->
+<!--            <img src="/img/logo2.svg" alt="하단로고"></div>-->
+    </div>
+</div>
+
+</body>
+</html>

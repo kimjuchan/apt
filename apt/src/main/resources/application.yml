@@ -1,0 +1,19 @@
+
+#LOCAL//DEV ??
+spring:
+
+  thymeleaf:
+    cache: false
+
+  datasource:
+    #
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/apartment
+    username: root
+    password: 1q2w3e4r!@#
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+
+
