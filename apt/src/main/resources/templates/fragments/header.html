@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="header">
+
+    <header>
+        <div class="hd-top clearfix">
+            <ul class="hd-nav">
+                <li><a href="/admin/logout">로그아웃</a></li>
+                <li><a>마이페이지</a></li>
+            </ul>
+            <div class="hd-in clearfix">
+                <h1 class="logo"><!--
+                    <img src="/img/logo.svg" alt="세종특별자치시 소방본부">-->
+                </h1>
+            </div>
+        </div>
+        <nav class="clearfix">
+            <ul class="gnb">
+                <li>
+                    <ul class="lnb">
+                        <li><a href="/admin/contentsboard/1/CD01">menu1</a></li>
+                        <li><a href="/admin/contentsboard/1/CD02">menu2</a></li>
+                        <li><a href="/admin/contentsboard/1/CD03">menu3</a></li>
+                        <li><a href="/admin/contentsboard/1/CD04">menu4</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</th:block>
+</html>

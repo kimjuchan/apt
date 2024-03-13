@@ -22,7 +22,6 @@ public class User extends BaseEntity {
     @Column(name="user_id")
     private Long id;
 
-
     private String loginId;
     private String password;
 
@@ -38,6 +37,7 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserRoleType roleType;
 
+    private Long failCount;
 
 
     //정보

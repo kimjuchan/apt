@@ -6,12 +6,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 
 @Slf4j
@@ -22,6 +24,10 @@ public class UserLoginSuccessCustomHandler implements AuthenticationSuccessHandl
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authResult) throws IOException {
+
+
+        Set<String> roles = AuthorityUtils.authorityListToSet(authResult.getAuthorities());
+
         // IP, 세션 ID
         WebAuthenticationDetails web = (WebAuthenticationDetails) authResult.getDetails();
         System.out.println("IP: " + web.getRemoteAddress());

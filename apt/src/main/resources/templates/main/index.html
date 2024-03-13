@@ -1,35 +1,102 @@
-<!doctype html>
-<html class="no-js" lang="" xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
-<head>
-    <meta charset="utf-8">
-    <title>메인 화면</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-          rel="stylesheet">
-    <link rel="stylesheet" href="/css/login.css">
-</head>
-
-<body class="login">
-<div class="login-out">
-    <div class="login-in clearfix">
-        메인 화면 정상 이동. (로그인 설정)
-        <div class="login-right">
-            <div class="right-bg">
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="~{layout/default}">
+<th:block layout:fragment="content">
+    <main>
+        <div class="slider-box">
+            <div class="slider">
+                <div class="main-sd">
+                    <div style="background-image: url(/images/b.jpg);">
+                        <p><b>모두의 아파트</b><br><span> Apartment Main View</span></p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="logo-box">
-    <!-- 세종 -->
-        <!--<img src="/img/logo.svg" alt="하단로고"></div>-->
-    <!-- 용인 -->
-<!--        <img src="/img/logo-kor.svg" alt="하단로고"></div>-->
-    <!-- 울산 -->
-<!--            <img src="/img/logo2.svg" alt="하단로고"></div>-->
-    </div>
-</div>
+        <div class="main-in clearfix">
+            <div class="main-top clearfix">
+                <ul class="total-ul clearfix">
+                    <li>
+                        <i style="background-image: url(/images/i-1.png);"></i>
+                        <div class="to-p">
+                            <p>영상</p>
+                            <p><span>200</span>점</p>
+                        </div>
 
-</body>
+                    </li>
+                    <li>
+                        <i style="background-image: url(/images/i-2.png);"></i>
+                        <div class="to-p">
+                            <p>이미지</p>
+                            <p><span>300</span>건</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i style="background-image: url(/images/i-3.png);"></i>
+                        <div class="to-p">
+                            <p>문서</p>
+                            <p><span>100</span>건</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i style="background-image: url(/images/i-4.png);"></i>
+                        <div class="to-p">
+                            <p>기타</p>
+                            <p><span>10</span>건</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i style="background-image: url(/images/i-5.png);"></i>
+                        <div class="to-p">
+                            <p>목록</p>
+                            <p><span>10</span>건</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="main-md">
+                <div class="m-left">
+                    <div class="tit-box clearfix">
+                        <h2 class="tit">공지사항</h2>
+                        <button type="button">MORE</button>
+                    </div>
+                    <ul class="list-ul">
+                        <li class="none-t">공지사항이 없습니다.</li>
+                        <li><p>공지사항</p> <span>2021-01-25</span></li>
+                        <li><p>공지사항</p> <span>2021-01-25</span></li>
+                        <li><p>공지사항</p> <span>2021-01-25</span></li>
+                    </ul>
+                    <div class="tit-box clearfix">
+                        <h2 class="tit mt50">바로가기</h2>
+                    </div>
+                    <ul class="sel-ul">
+                        <li>
+                            <select name="">
+                                <option value="">바로가기 사이트1</option>
+                                <option value="">바로가기 사이트2</option>
+                            </select>
+                        </li>
+                        <li>
+                            <select name="">
+                                <option value="">바로가기 사이트1</option>
+                                <option value="">바로가기 사이트2</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="m-right">
+                    <div class="tit-box clearfix">
+                        <h2 class="tit">최근 게시물</h2>
+                        <button type="button">MORE</button>
+                    </div>
+                    <ul class="list-ul">
+                        <li class="none-t">최근 게시물이 없습니다.</li>
+                        <li><p>공지사항</p> <span>2021-01-25</span></li>
+                        <li><p>공지사항</p> <span>2021-01-25</span></li>
+                        <li><p>공지사항</p> <span>2021-01-25</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</th:block>
 </html>

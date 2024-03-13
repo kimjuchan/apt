@@ -16,6 +16,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
+
 /**
  *
  * -Session 방식 동작
@@ -148,6 +150,11 @@ public class SecurityConfig {
                         .userDetailsService(customUserDetailService)
                         .authenticationSuccessHandler(successHandler)
                 )*/
+
+
+
+
+
                 .logout(withDefaults())
         ;
         return http.build();

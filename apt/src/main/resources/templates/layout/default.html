@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="NFA">
-<!--        <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>-->
-<!--        <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>-->
-        <title>NFA</title>
-    </head>
-    <body>
-        <th:block th:replace="fragments/css :: cssFragment"></th:block>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="NFA">
+    <!--        <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>-->
+    <!--        <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+    <title>NFA</title>
+</head>
+<body>
+<th:block th:replace="fragments/css :: cssFragment"></th:block>
 
-        <div class="page-wrapper default-theme sidebar-bg toggled">
-            <th:block th:replace="fragments/header :: header"></th:block>
-            <th:block layout:fragment="content"></th:block>
-        </div>
+<div class="page-wrapper default-theme sidebar-bg toggled">
+    <th:block th:replace="fragments/header :: header"></th:block>
+    <th:block layout:fragment="content"></th:block>
+</div>
 
-        <th:block th:replace="fragments/js :: javascriptFragment"></th:block>
-    </body>
+<th:block th:replace="fragments/js :: javascriptFragment"></th:block>
+</body>
 </html>

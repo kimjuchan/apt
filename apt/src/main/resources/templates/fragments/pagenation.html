@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="pageNationFragment">
+
+    <div class="center-block" style="display: flex;width: 100%;" th:if="${totalPage > 0}">
+        <nav aria-label="Page navigation" style="float: none; margin: 0 auto;">
+            <ul class="pagination"
+                th:with="start=${(page_no-1)/10*10 + 1}, last=(${start + 9 < totalPage ? start + 9 : totalPage})">
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous" href="javascript:void(0)"
+                       th:onclick="goList(1)">
+                                    <span aria-hidden="true"><i class="fa fa-chevron-left"></i><i
+                                            class="fa fa-chevron-left"> << </i></span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous" href="javascript:void(0)"
+                       th:if="${page_no != 1}" th:onclick="goList([[${page_no - 1}]])">
+                        <span aria-hidden="true"><i class="fa fa-chevron-left"> < </i></span>
+                    </a>
+                    <a class="page-link" aria-label="Previous" href="javascript:void(0)"
+                       th:unless="${page_no != 1}" th:onclick="javascript:alert('첫번째 페이지입니다.')">
+                        <span aria-hidden="true"><i class="fa fa-chevron-left"> < </i></span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(start, last)}"
+                    th:class="${page} == ${page_no} ? 'page-item active' : 'page-item'">
+                    <a th:onclick="goList([[${page}]])" th:class="page-link" th:text="${page}"
+                       href="#"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next" href="javascript:void(0)"
+                       th:if="${page_no != totalPage}" th:onclick="goList([[${page_no + 1}]])">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right"> > </i></span>
+                    </a>
+                    <a class="page-link" aria-label="Next" href="javascript:void(0)" th:unless="${page_no != totalPage}"
+                       th:onclick="javascript:alert('마지막 페이지입니다.')">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right"> > </i></span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next" href="javascript:void(0)"
+                       th:onclick="goList([[${totalPage}]])">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right"></i>
+                        <i class="fa fa-chevron-right"> >> </i></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <div id="form-group">
+        <form id="listForm" method="post" th:action="${#request.getRequestURI()}">
+            <input type="hidden" name="totalCnt" th:value="${totalPage}"/>
+            <input type="hidden" name="page" th:value="${page_no}"/>
+            <input type="hidden" name="maxrow" th:value="${maxrow}"/>
+
+            <input type="hidden" name="s_startDt" th:value="${searchData?.s_startDt}"/>
+            <input type="hidden" name="s_endDt" th:value="${searchData?.s_endDt}"/>
+            <input type="hidden" name="s_board_belong" th:value="${searchData?.s_board_belong}"/>
+            <input type="hidden" name="s_board_title" th:value="${searchData?.s_board_title}"/>
+
+            <input type="hidden" name="board_file_cate" th:value="${searchData?.s_board_file_cate}">
+<!--            <input type="hidden" name="board_db_category" th:value="${searchData?.board_db_category}">-->
+            <input type="hidden" name="category" th:value="${searchData?.category}">
+        </form>
+    </div>
+
+
+    <script>
+        function goList(page) {
+            var form = document.getElementById("listForm");
+            form.page.value = page;
+            form.submit();
+        }
+    </script>
+</th:block>
+
+<th:block th:fragment="pageNationStatisticsFragment">
+
+    <div class="center-block" style="display: flex;width: 100%;" th:if="${totalPage > 0}">
+        <nav aria-label="Page navigation" style="float: none; margin: 0 auto;">
+            <ul class="pagination"
+                th:with="start=${(page_no-1)/10*10 + 1}, last=(${start + 9 < totalPage ? start + 9 : totalPage})">
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous" href="javascript:void(0)"
+                       th:onclick="goList(1)">
+                                    <span aria-hidden="true"><i class="fa fa-chevron-left"></i><i
+                                            class="fa fa-chevron-left"> << </i></span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous" href="javascript:void(0)"
+                       th:if="${page_no != 1}" th:onclick="goList([[${page_no - 1}]])">
+                        <span aria-hidden="true"><i class="fa fa-chevron-left"> < </i></span>
+                    </a>
+                    <a class="page-link" aria-label="Previous" href="javascript:void(0)"
+                       th:unless="${page_no != 1}" th:onclick="javascript:alert('첫번째 페이지입니다.')">
+                        <span aria-hidden="true"><i class="fa fa-chevron-left"> < </i></span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(start, last)}"
+                    th:class="${page} == ${page_no} ? 'page-item active' : 'page-item'">
+                    <a th:onclick="goList([[${page}]])" th:class="page-link" th:text="${page}"
+                       href="#"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next" href="javascript:void(0)"
+                       th:if="${page_no != totalPage}" th:onclick="goList([[${page_no + 1}]])">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right"> > </i></span>
+                    </a>
+                    <a class="page-link" aria-label="Next" href="javascript:void(0)" th:unless="${page_no != totalPage}"
+                       th:onclick="javascript:alert('마지막 페이지입니다.')">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right"> > </i></span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next" href="javascript:void(0)"
+                       th:onclick="goList([[${totalPage}]])">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right"></i>
+                        <i class="fa fa-chevron-right"> >> </i></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="form-group">
+        <form id="listForm" method="post" th:action="${#request.getRequestURI()}">
+            <input type="hidden" name="totalCnt" th:value="${totalPage}"/>
+            <input type="hidden" name="page" th:value="${page_no}"/>
+            <input type="hidden" name="maxrow" th:value="${maxrow}"/>
+
+            <input type="hidden" name="s_startDt" th:value="${searchData?.s_startDt}"/>
+            <input type="hidden" name="s_endDt" th:value="${searchData?.s_endDt}"/>
+            <input type="hidden" name="category" th:value="${searchData?.category}">
+            <input type="hidden" name="s_board_belong" th:value="${searchData?.s_board_belong}"/>
+        </form>
+    </div>
+
+
+    <script>
+        function goList(page) {
+            var form = document.getElementById("listForm");
+            form.page.value = page;
+            form.submit();
+        }
+    </script>
+</th:block>
+</html>

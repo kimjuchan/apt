@@ -1,0 +1,120 @@
+<!--
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="searchBoardTable">
+    <form th:method="post" id="exceldownloadForm">
+        <input type="hidden" name="e_board_title" value="">
+        <input type="hidden" name="e_board_belong" value="">
+        <input type="hidden" name="e_startDt" value="">
+        <input type="hidden" name="e_endDt" value="">
+        <input type="hidden" name="e_board_file_cate" value="">
+        <input type="hidden" name="e_category" value="">
+        <input type="hidden" name="e_page_no" value="">
+    </form>
+
+    <form th:action="${#request.getRequestURI()}" th:method="post" id="searchBoardForm">
+        <table class="sec-table">
+            <colgroup>
+                <col style="width: 12%;">
+                <col style="width: 30%;">
+                <col style="width: 12%;">
+                <col style="width: *;">
+                <col style="width: 6%;">
+            </colgroup>
+            <tr>
+                <td class="sec-tit">제목</td>
+                <td colspan="3"><input type="text" name="s_board_title"
+                                       th:value="${searchData.s_board_title}"></td>
+                <td rowspan="3" class="pd0">
+                    <button type="button" class="btn sec-btn vh10" th:onclick="fncFormMethod('S')">조회</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="sec-tit">부서명</td>
+                <td class="sec-box">
+                    <select name = s_board_belong>
+                        <option value="CT00">전체</option>
+                        <option th:each="deplist : ${depList}" th:text="${deplist.category_name}"
+                                th:value="${deplist.category_code}"
+                        th:selected="${searchData.s_board_belong} == ${deplist.category_code}">
+                        </option>
+                    </select>
+                </td>
+                <td class="sec-tit">등록일자</td>
+                <td>
+                    <div class="date">
+                        <div class="cla">
+                            <input type="text" id="from_date" name="s_startDt" class="date_pick"
+                                   th:value="${searchData.s_startDt}">
+                            <div class="cla-img1"></div>
+                        </div>
+                        <p class="cla-p1"> ~ </p>
+                        <div class="cla">
+                            <input type="text" id="to_date" name="s_endDt" class="date_pick"
+                                   th:value="${searchData.s_endDt}">
+                            <div class="cla-img1"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" name="board_file_cate" th:value="${searchData.s_board_file_cate}">
+&lt;!&ndash;        <input type="hidden" name="board_db_category" th:value="${searchData.board_db_category}">&ndash;&gt;
+        <input type="hidden" name="category" th:value="${searchData.category}">
+        <input type="hidden" name="page_no" th:value="${searchData.page}">
+    </form>
+
+
+</th:block>
+
+<th:block th:fragment="searchStatisticsTable">
+
+    <form th:action="${#request.getRequestURI()}" th:method="post" id="searchStatisticsForm">
+        <table class="sec-table">
+            <colgroup>
+                <col style="width: 12%;">
+                <col style="width: 30%;">
+                <col style="width: 12%;">
+                <col style="width: 33%;">
+                <col style="width: 80px;">
+            </colgroup>
+            <tr>
+                <td class="sec-tit">구분</td>
+                <td colspan="3">
+                    <select name="s_board_belong">
+                        <option value="CT00">전체</option>
+                        <option th:each="board_dep : ${board_dep}" th:text="${board_dep.category_name}"
+                                th:value="${board_dep.category_code}"
+                                th:selected="${searchData.s_board_belong} == ${board_dep.category_code}">
+                        </option>
+                    </select>
+                </td>
+                <td rowspan="3" class="pd0">
+                    <button type="submit" class="btn sec-btn small">조회</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="sec-tit">등록연도</td>
+                <td colspan="3">
+                    <div class="date">
+                        <select name="s_startDt">
+                            <option value="">전체</option>
+                            <option th:each="year : ${#numbers.sequence(2000,2021)}" th:text="${year}" th:value="${year}" th:selected="${#strings.startsWith(searchData.s_startDt,year)}"></option>
+                        </select>
+                        <p class="date-p"> ~ </p>
+                        <select name="s_endDt">
+                            <option value="">전체</option>
+                            <option th:each="year : ${#numbers.sequence(2000,2021)}" th:text="${year}" th:value="${year}" th:selected="${#strings.startsWith(searchData.s_endDt,year)}"></option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        </table>
+&lt;!&ndash;        <input type="hidden" name="board_file_cate" th:value="${searchData.board_file_cate}">&ndash;&gt;
+&lt;!&ndash;        <input type="hidden" name="board_db_category" th:value="${searchData.board_db_category}">&ndash;&gt;
+        <input type="hidden" name="statistics_cate" th:value="${searchData.statistics_cate}">
+&lt;!&ndash;        <input type="hidden" name="page_no" th:value="${searchData.page}">&ndash;&gt;
+    </form>
+</th:block>
+</html>-->

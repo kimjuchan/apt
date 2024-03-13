@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/apt.iml" filepath="$PROJECT_DIR$/.idea/apt.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/apt.apt.main.iml" filepath="$PROJECT_DIR$/.idea/modules/apt.apt.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/apt.apt.main~1.iml" filepath="$PROJECT_DIR$/.idea/modules/apt.apt.main~1.iml" />
     </modules>
   </component>
 </project>
