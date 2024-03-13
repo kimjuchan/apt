@@ -27,17 +27,19 @@ public class UserServiceImpl {
         userCreateDto.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
         //Mapsturct  UserDto to User type change
         User user = UserMapper.INSTANCE.UserCreateRequestToEntity(userCreateDto);
-
         //exception 처리
         Long userId = Optional.of(userRepository.save(user).getId()).orElseThrow(() -> new RuntimeException("User save error"));
 
         return userId;
     }
 
-    public Long dupChkByLoginId(String loginId){
-        Long result = userRepository.findByLoginId(loginId).getId();
-
-        return result;
+    public void dupChkByLoginId(UserCreateDto userCreateDto){
+        Boolean dupChk = userRepository.existsByLoginId(userCreateDto.getLoginId());
+        if(!dupChk){
+            createUser(userCreateDto);
+        }else{
+            throw new RuntimeException("이미 가입된 userId 입니다.");
+        }
     }
 
 }

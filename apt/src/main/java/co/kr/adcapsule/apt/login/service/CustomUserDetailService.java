@@ -26,7 +26,6 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String login_id) throws UsernameNotFoundException {
 
         User user = Optional.of(userRepository.findByLoginId(login_id)).orElseThrow(()-> new UsernameNotFoundException("해당 로그인 정보를 다시 확인해주시기 바랍니다."));
-
         return new PrincipalDetails(user);
     }
 

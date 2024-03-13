@@ -76,7 +76,7 @@ body.login {
   border-radius: 10px 10px 10px 10px;
   -webkit-box-shadow: -2px 0px 13px -10px #000000;
   box-shadow: -2px 0px 13px -10px #000000;
-  background: url(../img/apt_login.jpg) no-repeat center / cover;
+  background: url(../images/apt_login.jpg) no-repeat center / cover;
 }
 
 /* .login-right .right-bg {

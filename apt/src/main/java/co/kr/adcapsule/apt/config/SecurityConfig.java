@@ -8,20 +8,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
-
 import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 /**
  *
@@ -105,55 +98,82 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+      /*AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
 
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
-        requestHandler.setCsrfRequestAttributeName("_csrf");
+        requestHandler.setCsrfRequestAttributeName("_csrf");*/
         http
-                .csrf(csrf -> csrf
+               /* .csrf(csrf -> csrf
                         .csrfTokenRequestHandler(requestHandler)
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .ignoringRequestMatchers("/", "/user/login/**", "/user/logout/**")
-                )
+                )*/
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 //url 접근 권한 설정.
                 .authorizeHttpRequests(authorizeRequest  -> authorizeRequest
-                        .requestMatchers("/user/sign-in").permitAll()
-                        .requestMatchers("/user/sign-up").permitAll()
-                        .requestMatchers("/user/login").permitAll()
-                        .requestMatchers("/user/create").permitAll()
-                        .requestMatchers("/css/**","/images/**","/js/**").permitAll()
-                        .anyRequest().hasRole("USER")
+                                .requestMatchers("/user/sign-in").permitAll()
+                                .requestMatchers("/user/sign-up").permitAll()
+                                .requestMatchers("/user/login").permitAll()
+                                .requestMatchers("/user/create").permitAll()
+                                .requestMatchers("/css/**","/images/**","/js/**").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .anyRequest().permitAll()
+                        //.anyRequest().hasRole("USER")
                 )
+                //인증 구현 방식은 2가지
+                /**
+                 * 1) formLogin을 통해서 구현하게되면 기본적으로 UsernamePasswordAuthenticationFilter를 통해서 provider 호출 후 인증 처리
+                 *
+                 * 2) UsernamePasswordAuthenticationFilter를 상속받은 customFilter 구현하여 직접 인증 처리 로직 구현.
+                 *
+                 */
                 //자체적으로 선언 시 기본 UsernamePasswordAuthenticationFilter를 통해서 폼 기반 로그인 처리.
-
                 .formLogin(login -> login
-                        .loginPage("/user/login")	// [A] 커스텀 로그인 페이지 지정
+                        .loginPage("/user/login")	                    // [A] 커스텀 로그인 페이지 지정
                         .loginProcessingUrl("/user/login-processing")	// [B] submit 받을 url
-                        .usernameParameter("loginId")	// [C] submit할 아이디
-                        .passwordParameter("password")	// [D] submit할 비밀번호
+                        .usernameParameter("loginId")	                // [C] submit할 아이디
+                        .passwordParameter("password")	                // [D] submit할 비밀번호
                         .successHandler(successHandler)
+                        //이친구를 설정하게 되면 위에 successHandler를 안탐   -> successHandler가 구현하면서 추가 작업을 더 할 수 있어서 선택.
+                        //.defaultSuccessUrl("/main/index")
                         .failureHandler(failureHandler)
-
                         .permitAll()
                 )
-                .addFilter(new UsernamePasswordAuthenticationCustomFilter(authenticationManager, objectMapper , successHandler, failureHandler))
-               /* .rememberMe(customizer -> customizer
+
+                //.addFilter(new UsernamePasswordAuthenticationCustomFilter(authenticationManager, objectMapper , successHandler, failureHandler))
+                /* .rememberMe(customizer -> customizer
                         .rememberMeParameter("remember-me")
                         .tokenValiditySeconds(ONE_MONTH)
                         .userDetailsService(customUserDetailService)
                         .authenticationSuccessHandler(successHandler)
                 )*/
-
                 .logout(withDefaults())
         ;
         return http.build();
     }
 
 
+    //CORS 설정
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Content-Type", "Authorization", "X-XSRF-token"));
+        configuration.setAllowCredentials(false);
+        //3600초
+        configuration.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+
+    /*
 
     public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
-
         @Override
         public void configure(HttpSecurity http)  {
             AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
@@ -161,7 +181,7 @@ public class SecurityConfig {
             http.addFilter(new UsernamePasswordAuthenticationCustomFilter(authenticationManager, objectMapper , successHandler, failureHandler));
         }
     }
-
+*/
 
 
 
