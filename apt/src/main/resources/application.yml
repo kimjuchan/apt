@@ -4,6 +4,8 @@ spring:
 
   thymeleaf:
     cache: false
+    prefix: classpath:/templates/
+    suffix: .html
 
   datasource:
     #
@@ -14,6 +16,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      default_batch_fetch_size: 100 # in query 자동
 
 
 

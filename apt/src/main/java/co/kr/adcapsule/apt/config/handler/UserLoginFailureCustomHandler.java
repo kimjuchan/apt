@@ -36,9 +36,10 @@ public class UserLoginFailureCustomHandler implements AuthenticationFailureHandl
 
         log.info("result fail Msg >> " + failMessage);
         log.info("result fail Msg >> " + failMessage);
-
-
         //fail cnt ++
+
+        //이후 혹시나 가지고 잇는 session도 삭제처리
+
 
 
     }

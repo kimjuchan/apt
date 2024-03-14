@@ -28,6 +28,7 @@ public class UserLoginSuccessCustomHandler implements AuthenticationSuccessHandl
 
         Set<String> roles = AuthorityUtils.authorityListToSet(authResult.getAuthorities());
 
+
         // IP, 세션 ID
         WebAuthenticationDetails web = (WebAuthenticationDetails) authResult.getDetails();
         System.out.println("IP: " + web.getRemoteAddress());

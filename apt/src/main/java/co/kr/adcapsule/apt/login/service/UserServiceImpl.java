@@ -42,4 +42,7 @@ public class UserServiceImpl {
         }
     }
 
+    //로그인 실패 시 fail count ++ 처리  (5회 이상 틀릴 경우 상태 값 "lock" 처리)
+
+
 }
